@@ -9,10 +9,10 @@ import java.awt.event.*;
 import java.awt.*;
 
 /**
-* @author Robyn Stevens     222201789
+ * @author Robyn Stevens 222201789
  */
-
 public class GuiServerApp extends JFrame implements ActionListener {
+
     private ServerSocket listener;
     private String msg = "";
     private String upCaseMsg = "";
@@ -48,10 +48,6 @@ public class GuiServerApp extends JFrame implements ActionListener {
 
         exitBtn.addActionListener(this);
 
-        setSize(500, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
         try {
             listenForClients();
         } catch (IOException ex) {
@@ -68,7 +64,7 @@ public class GuiServerApp extends JFrame implements ActionListener {
     }
 
     //declare a method to initiate communication streams
-     private void getStreams() throws IOException {
+    private void getStreams() throws IOException {
         out = new ObjectOutputStream(client.getOutputStream());
         out.flush();
         in = new ObjectInputStream(client.getInputStream());
@@ -107,10 +103,18 @@ public class GuiServerApp extends JFrame implements ActionListener {
     //declare a method in which you close the streams and the socket connection    
     private void closeConnection() {
         try {
-            if (out != null) out.close();
-            if (in != null) in.close();
-            if (client != null) client.close();
-            if (listener != null) listener.close();
+            if (out != null) {
+                out.close();
+            }
+            if (in != null) {
+                in.close();
+            }
+            if (client != null) {
+                client.close();
+            }
+            if (listener != null) {
+                listener.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,6 +129,10 @@ public class GuiServerApp extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new GuiServerApp();
+        GuiServerApp RDS = new GuiServerApp();
+        RDS.setSize(500, 300);
+        RDS.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        RDS.setVisible(true);
+
     }
 }
